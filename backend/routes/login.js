@@ -6,8 +6,12 @@ const jwt = require("jsonwebtoken")
 
 const secret = "realEstate"
 
+const bodyParser = require('body-parser');
+
+
 router.use(express.json())
-router.use(express.urlencoded())
+
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post('/login', async (req, res) => {
 

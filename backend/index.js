@@ -18,18 +18,20 @@ const registerRoutes = require('./routes/register');
 // const uri='mongodb://localhost/RealEstate'
 const uri='mongodb+srv://prathmesh:prathmesh@cluster0.jdolkoc.mongodb.net/realestate?retryWrites=true&w=majority'
 //const uri="mongodb+srv://prathmesh:prathmesh@cluster0.jdolkoc.mongodb.net/userdb?retryWrites=true&w=majority'"
-const conn=async()=>{
-  await mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-        if (err) {
-            console.log(err.message)
-        }
-        else {
-            console.log("Connected to mongoDB successfully")
-        }
-    }
-    )
-}
-conn()
+// const conn=async()=>{
+//   await mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+//         if (err) {
+//             console.log(err.message)
+//         }
+//         else {
+//             console.log("Connected to mongoDB successfully")
+//         }
+//     }
+//     )
+// }
+// conn()
+mongoose.connect(uri)
+  .then(() => console.log('Connected! to mongoDb '));
 
 
 //middlewares
