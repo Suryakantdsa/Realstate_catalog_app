@@ -19,8 +19,8 @@ const Signin = () => {
     console.log(data);
     setErr("");
     setLoading(true)
-    // fetch("https://realestate-suryakant.onrender.com/login"
-    fetch("http://localhost:5173/login"
+    fetch("https://realestate-suryakant.onrender.com/login"
+    // fetch("http://localhost:5173/login"
     
     , {
       method: "POST",
