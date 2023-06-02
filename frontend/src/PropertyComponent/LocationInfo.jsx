@@ -3,52 +3,32 @@ import "./BasicInfo.css"
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import AddedSucess from "./AddedSucess";
+import { useDispatch, useSelector } from "react-redux";
+import { addData,sendData } from "../Store/Slice/PropertySlice";
 
-const LocationInfo = (props) => {
+const LocationInfo = () => {
     // const [isAlert,makeAlert]=useState(false)
     const navigate=useNavigate()
     let blueColorUrl = window.location.href
     useEffect(() => {
-        // console.log( blueColorUrl);
+
     }, [blueColorUrl]);
-    let Views = Math.floor(Math.random() * 100);
-    let Daysleft = "6"
-    let sold = "Unsold"
+
+    
+    const [formData, setFormdata] = useState({})
+    const dispatch = useDispatch()
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormdata((prevData) => ({ ...prevData, [name]: value }))
+    }
     const uploadPost = (e) => {
-        // e.preventDefault();
-        const formData = new FormData();
-        formData.append("property", props.property);
-        formData.append("contact", props.contact);
-        formData.append("area", props.area);
-        formData.append("views", Views);
-        formData.append("daysleft", Daysleft)
-        formData.append("status", sold)
-
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
-        console.log(props.property);
-        fetch("https://realestate-suryakant.onrender.com/api/property",
-            {
-                method: 'POST',
-                body: formData
-
-            }).then(res => res.json())
-            .then(data => {
-                console.log("success", data);
-            
-                // makeAlert(true)
-            }).catch(err => {
-                console.log("error", err);
-            }).finally(()=>{
-                // makeAlert(false)
-                alert("all peroperty details added sucessfully")
-                navigate("/properties")
-            });
-
+        e.preventDefault()
+        console.log(formData)
+        dispatch(addData({ key: "locationInfo", value: formData }))
+        dispatch(sendData({ data: formData }));
 
     }
-    // console.log(props);
 
     return (
 
@@ -71,7 +51,7 @@ const LocationInfo = (props) => {
                     </section>
 
                     <section className="inputSection"> <label className="WideLabel" htmlFor="PropertyAge">Property Age</label>
-                        <input className="WideInput" type="text" id="PropertyAge" name="PropertyAge"
+                        <input className="WideInput" type="text" id="PropertyAge" name="PropertyAge" onChange={handleChange} value={formData.PropertyAge || ""}
                             placeholder="Select Property Age" /></section>
 
                     <section className="inputSection"> <label className="WideLabel" htmlFor="PropertyDescription">Property Description</label>
@@ -113,7 +93,7 @@ const LocationInfo = (props) => {
                 <Link to='/general'
                     style={{ textDecoration: "none" }}
                 >    <button className="button1">Previous</button></Link>
-                <Link to='/properties'
+                <Link
                     style={{ textDecoration: "none" }}
                 > <button onClick={uploadPost} className="button2">Add Property</button></Link>
 

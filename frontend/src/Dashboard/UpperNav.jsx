@@ -22,7 +22,7 @@ const UpperNav = () => {
             <p>USER ID:{Math.floor(Math.random() * 99) +
                 "PPD" +
                 Math.floor(Math.random() * 999 + 999)}</p>
-            <p className='account'>
+            <div className='account'>
                 <span>
                     <span className='account-icon'><BsPerson /></span>
                     <span className='account-name'>{user}</span>
@@ -31,8 +31,9 @@ const UpperNav = () => {
                     /></span>
                 </span>
                 {log && <p className='logout-option' onClick={() => { setLogout(false); handleLog() }} >Logout</p>}
-            </p>
+            </div>
         </div>
+
 
     )
 }
